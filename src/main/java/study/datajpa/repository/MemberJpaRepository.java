@@ -29,7 +29,7 @@ public class MemberJpaRepository {
                 .getResultList();
     }
 
-    public Optional<Member> fomdById(Long id) {
+    public Optional<Member> findById(Long id) {
         Member member = em.find(Member.class, id);
         return Optional.ofNullable(member);
     }
