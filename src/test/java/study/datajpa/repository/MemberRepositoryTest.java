@@ -30,6 +30,7 @@ class MemberRepositoryTest {
 
     @Autowired
     TeamRepository teamRepository;
+
     @PersistenceContext
     EntityManager em;
 
@@ -255,6 +256,10 @@ class MemberRepositoryTest {
 
         //when
         Member findMember = memberRepository.findReadOnlyByUsername("member1");
+    }
 
+    @Test
+    public void callCustom() {
+        List<Member> result = memberRepository.findMemberCustom();
     }
 }
