@@ -262,4 +262,26 @@ class MemberRepositoryTest {
     public void callCustom() {
         List<Member> result = memberRepository.findMemberCustom();
     }
+
+    @Test
+    public void projections() {
+        //given
+        Team teamA = new Team("teamA");
+        em.persist(teamA);
+
+        Member m1 = new Member("m1", 0, teamA);
+        Member m2 = new Member("m2", 0, teamA);
+        em.persist(m1);
+        em.persist(m2);
+
+        em.flush();
+        em.clear();
+
+        //when
+        List<UsernameOnlyDto> result = memberRepository.findProjectionsByUsername("m1", UsernameOnlyDto.class); // UsernameOnly는 구현체가 아니라 인터페이스 입니다.
+
+        for(UsernameOnlyDto usernameOnly : result) {
+            System.out.println("usernameOnly = " + usernameOnly);
+        }
+    }
 }
